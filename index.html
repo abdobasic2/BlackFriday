@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مقترح افكار الجمعة البيضاء 2025</title>
+    <title>واجهة مركز التحكم السيبراني - الجمعة البيضاء</title>
     
     <!-- Load Inter and Cairo fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
@@ -124,7 +124,8 @@
                 currentView: 'selector', // 'selector' (selection screen) or 'content' (details screen)
                 multiProposals: [
                     {id: 'idea1', title: 'التحكم صار بيدك 🚀'}, 
-                    {id: 'idea2', title: 'الباقات التفصيلية 📦'}
+                    {id: 'idea2', title: 'الباقات التفصيلية 📦'},
+                    {id: 'idea6', title: 'العرض على كيفك'} // Added new proposal
                 ],
                 singleProposals: [
                     {id: 'idea3', title: 'تكسير الأسعار 🔨'}, 
@@ -269,7 +270,7 @@
                             </div>
                         </template>
                         
-                        <!-- Content for أولاً: حدث من عدة عروض - المقترح الثاني: "عروض الجمعة البيضاء" -->
+                        <!-- Content for أولاً: حدث من عدة عروض - المقترح الثاني: "الباقات التفصيلية" -->
                         <template x-if="activeProposal === 'idea2'">
                             <div x-transition:enter.duration.500ms class="font-sans space-y-6 text-neon-white/95">
                                 <h3 class="text-3xl md:text-4xl font-extrabold text-cmd-orange animate-glitch">الباقات التفصيلية 📦</h3>
@@ -293,6 +294,33 @@
                                 </p>
                             </div>
                         </template>
+
+                        <!-- Content for أولاً: حدث من عدة عروض - المقترح الثالث: "العرض على كيفك" -->
+                        <template x-if="activeProposal === 'idea6'">
+                            <div x-transition:enter.duration.500ms class="font-sans space-y-6 text-neon-white/95">
+                                <h3 class="text-3xl md:text-4xl font-extrabold text-cmd-orange animate-glitch">العرض على كيفك</h3>
+                                <div class="text-base font-mono text-terminal-green border-b border-cmd-orange/50 pb-3">الحالة: من البداية الى النهاية العميل يحدد ويختار في الخدمات على كيفه</div>
+                                
+                                <h4 class="text-xl font-bold text-cmd-blue pt-2">الشعار والبيانات:</h4>
+                                <p class="border-r-4 border-cmd-blue pr-4 pt-2 text-base leading-relaxed">
+                                    **الشعار:** " العرض على كيفك" <br>
+                                    **الموعد:** "من 23 نوفمبر لِين 30 نوفمبر ." <br>
+                                    **البيان:** " الجمعة البيضاء في تواصل الرياض غير اختار الخدمات الي تناسبك والعرض على كيفك ." <br>
+                                    **الختام:** "العرض على كيفك" تواصل الرياض "تحكم. تتبع. اطمئن"
+                                </p>
+                                
+                                <h4 class="text-xl font-bold text-cmd-blue pt-4">وصف الفكرة:</h4>
+                                <p class="border-r-4 border-cmd-blue pr-4 pt-2 text-base leading-relaxed">
+                                    الفكره انه بإمكان العميل أن يختار الخدمات الي تناسبه (فاصل، حساس) مع خدمة التتبع ويحدد عدد مركباته ثم نرسل له عدة عروض على حسب كل المنتج والسريفر يعني مثلاً عرض قوي لجهاز ال2G وسريفر معين وعرض اخر لجهاز ال4G وسريفر اخر وهكذا ويكون افضل عرض هو الي يشمل جهز ال2G .
+                                </p>
+                                
+                                <h4 class="text-xl font-bold text-cmd-blue pt-4">الفكرة الإبداعية:</h4>
+                                <p class="text-base pt-2 border-t border-cmd-blue/30 text-neon-white/80 leading-relaxed">
+                                    الفكرة الإبداعية هنا اننا نجعل العميل يشعر انه المتحكم في البداية إلى النهايه ممايجعل العرض مميزاً وختلفاً وتجربة لن يكررها مع اي منافس وفي نفس الوقت يكون اكثر عرض توفيراً هو لجهاز الـ 2G
+                                </p>
+                            </div>
+                        </template>
+
                         
                         <!-- Content for ثانياً: حدث العرض الواحد - المقترح الأول: "أسبوع تكسير الأسعار" -->
                         <template x-if="activeProposal === 'idea3'">
