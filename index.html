@@ -24,7 +24,7 @@
                         'terminal-green': '#00FF00',
                     },
                     fontFamily: {
-                        // Ensure Cairo is the primary font for Arabic content, followed by Inter and system sans-serif
+                        // Cairo is primary for Arabic
                         sans: ['Cairo', 'Inter', 'sans-serif'], 
                         mono: ['Consolas', 'Menlo', 'monospace'], // Technical font
                     },
@@ -34,10 +34,9 @@
                             '100%': { backgroundPosition: '0% 100%' },
                         },
                         neonPulse: {
-                            '0%, 100%': { boxShadow: '0 0 5px #4D96FF, 0 0 10px #4D96FF' },
-                            '50%': { boxShadow: '0 0 15px #4D96FF, 0 0 25px #4D96FF' },
+                            '0%, 100%': { boxShadow: '0 0 8px #4D96FF, 0 0 16px #4D96FF' },
+                            '50%': { boxShadow: '0 0 20px #4D96FF, 0 0 30px #4D96FF' },
                         },
-                        // Slightly more subtle glitch for titles
                         glitch: {
                             '0%': { transform: 'translate(0.5px, 0.5px)', opacity: '0.99' },
                             '5%': { transform: 'translate(-0.5px, -0.5px)', opacity: '0.98' },
@@ -45,107 +44,77 @@
                             '15%': { transform: 'translate(-0.5px, 0.5px)', opacity: '0.99' },
                             '20%': { transform: 'translate(0, 0)', opacity: '1' },
                         },
-                        borderAnim: {
-                            '0%': { backgroundPosition: '0% 50%' },
-                            '100%': { backgroundPosition: '100% 50%' },
-                        },
                     },
                     animation: {
                         scanline: 'scanline 3s infinite linear',
                         neonPulse: 'neonPulse 2s infinite alternate',
                         glitch: 'glitch 0.2s linear infinite alternate',
-                        borderAnim: 'borderAnim 5s linear infinite',
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Base styles */
+        /* Base styles for body and background */
         body {
             font-family: 'Cairo', 'Inter', sans-serif;
             background-color: #020721;
             color: #CCF7FF;
             min-height: 100vh;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Enhanced Cyber Panel Styling */
-        .cyber-panel {
-            /* Deeper shadow and distinct neon border */
-            border: 2px solid #0B1538;
-            border-top: 5px solid #4D96FF; 
-            box-shadow: inset 0 0 20px rgba(77, 150, 255, 0.3), 0 0 15px rgba(77, 150, 255, 0.5);
+        /* Modern Panel Design with Stronger Shadows and Curved Edges */
+        .modern-panel {
             background-color: #0B1538;
-            /* Grid overlay for matrix look - made more subtle */
-            background-image: linear-gradient(to right, #0B1538 1px, transparent 1px),
-                              linear-gradient(to bottom, #0B1538 1px, transparent 1px);
-            background-size: 30px 30px; /* Larger grid squares for clarity */
-            transition: box-shadow 0.3s ease-in-out;
-        }
-        
-        .cyber-panel:hover {
-            box-shadow: inset 0 0 30px rgba(77, 150, 255, 0.5), 0 0 25px rgba(77, 150, 255, 0.7);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(77, 150, 255, 0.2);
+            transition: transform 0.3s ease-in-out;
         }
 
-        /* Scanning effect overlay */
-        .scan-overlay {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                180deg,
-                rgba(0, 0, 0, 0) 0,
-                rgba(0, 0, 0, 0.1) 50%,
-                rgba(77, 150, 255, 0.15) 51%,
-                rgba(0, 0, 0, 0) 52%
-            );
-            background-size: 100% 400px; 
-            animation: scanline 3s infinite linear;
-            pointer-events: none;
-            mix-blend-mode: overlay;
-            opacity: 0.5;
+        /* Proposal Button Focus/Active Style */
+        .prop-btn {
+            border: 2px solid #0B1538;
+            transition: all 0.2s ease;
         }
 
-        /* Sidebar nav button active glow (increased contrast and touch area) */
-        .nav-btn {
-            transform: translateX(10px);
-            padding: 1rem; /* Increased padding for better touch target */
-        }
-        .nav-btn.active {
-            box-shadow: 0 0 15px rgba(77, 150, 255, 0.8), 0 0 30px rgba(77, 150, 255, 0.4);
-            border-right: 6px solid #CCF7FF; /* Thicker active indicator */
-            transform: translateX(0);
-            background-color: rgba(77, 150, 255, 0.15); /* Subtle background highlight */
+        .prop-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
         }
 
-        /* Proposal buttons - strong active state */
         .prop-btn.active {
-            box-shadow: 0 0 10px rgba(255, 140, 0, 0.8), 0 0 20px rgba(255, 140, 0, 0.3);
-            border-color: #FF8C00 !important;
-            background-color: rgba(255, 140, 0, 0.1); /* Subtle orange background */
+            border-color: #FF8C00;
+            background-color: rgba(255, 140, 0, 0.15);
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.8), inset 0 0 8px rgba(255, 140, 0, 0.5);
+            transform: scale(1.02);
+        }
+
+        /* Back Button Glow */
+        .back-btn {
+            box-shadow: 0 0 10px rgba(77, 150, 255, 0.5);
         }
     </style>
 </head>
-<body class="p-4 sm:p-8">
+<body class="p-3 sm:p-6">
 
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-xl lg:max-w-7xl mx-auto w-full flex-grow">
         <!-- Main Header / System Status -->
-        <header class="text-center mb-10 p-4 border-b-4 border-cmd-blue/50">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-wider font-sans text-neon-white animate-neonPulse mb-2">
+        <header class="text-center mb-6 sm:mb-10 p-4 border-b-4 border-cmd-blue/50">
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-wider font-sans text-neon-white animate-neonPulse mb-2">
                 مقترحات الجمعة البيضاء 2025
             </h1>
-            <p class="text-md sm:text-lg font-mono text-terminal-green">
+            <p class="text-sm sm:text-lg font-mono text-terminal-green">
                 <span id="system-status">INITIATING_PROTOCOL_2025...</span> | تعليمات مهمة جداً > لتنفيذ حملة ناجحة
             </p>
         </header>
 
-        <!-- Main Command Grid - Mobile Stacks Vertically, Desktop is 3-3-6 -->
+        <!-- Main Interface Container (Mobile-First / State Driven) -->
         <div x-data="{ 
                 activeMainTab: 'multi', 
                 activeProposal: 'idea1',
+                currentView: 'selector', // 'selector' (selection screen) or 'content' (details screen)
                 multiProposals: [
                     {id: 'idea1', title: 'التحكم صار بيدك 🚀'}, 
                     {id: 'idea2', title: 'الباقات التفصيلية 📦'}
@@ -155,110 +124,103 @@
                     {id: 'idea4', title: 'صفقة العمر ✨'}, 
                     {id: 'idea5', title: 'نصف التكلفة علينا 🤝'}
                 ],
-                setMainTab(tab) {
-                    this.activeMainTab = tab;
-                    // Reset active proposal based on the new tab
-                    if (tab === 'multi') {
-                        this.activeProposal = this.multiProposals[0].id;
-                    } else {
-                        this.activeProposal = this.singleProposals[0].id;
-                    }
+                selectProposal(id) {
+                    this.activeProposal = id;
+                    this.currentView = 'content';
+                },
+                goBack() {
+                    this.currentView = 'selector';
                 }
             }" 
-            class="grid lg:grid-cols-12 gap-6 md:gap-8 h-auto">
+            class="w-full">
             
-            <!-- Panel 1: Navigation Console (lg:col-span-3) -->
-            <!-- Enhanced design with rounded corners and stronger shadow -->
-            <aside class="lg:col-span-3 bg-panel-dark p-4 sm:p-6 rounded-2xl shadow-2xl border border-cmd-blue/40 h-auto">
-                <h2 class="text-xl font-black mb-4 text-cmd-blue border-b-2 border-cmd-blue/70 pb-2 font-sans">لوحة التحكم الرئيسية</h2>
+            <!-- ---------------------------------------------------- -->
+            <!-- VIEW 1: SELECTION SCREEN (visible on mobile initially) -->
+            <!-- ---------------------------------------------------- -->
+            <div x-show="currentView === 'selector'" x-transition:enter.duration.500ms x-transition:leave.duration.300ms 
+                 class="modern-panel p-6 rounded-3xl space-y-8">
                 
-                <div class="space-y-3">
-                    <!-- Nav Tab 1: Multi-Offer Event -->
-                    <button 
-                        @click="setMainTab('multi')"
-                        :class="{ 'active': activeMainTab === 'multi' }"
-                        class="nav-btn w-full text-right p-3 rounded-lg text-neon-white font-sans font-extrabold transition-all duration-300 border-r-6 border-transparent hover:bg-cmd-blue/20 hover:text-cmd-blue focus:outline-none focus:ring-2 focus:ring-cmd-blue/70"
-                    >
-                        <span class="flex items-center gap-4 text-lg">
-                            <span class="text-xl">💰</span>
-                            حدث العروض المتعددة
-                        </span>
-                    </button>
-                    <!-- Nav Tab 2: Single-Offer Event -->
-                    <button 
-                        @click="setMainTab('single')"
-                        :class="{ 'active': activeMainTab === 'single' }"
-                        class="nav-btn w-full text-right p-3 rounded-lg text-neon-white font-sans font-extrabold transition-all duration-300 border-r-6 border-transparent hover:bg-cmd-blue/20 hover:text-cmd-blue focus:outline-none focus:ring-2 focus:ring-cmd-blue/70"
-                    >
-                        <span class="flex items-center gap-4 text-lg">
-                            <span class="text-xl">🔥</span>
-                            حدث العرض الواحد
-                        </span>
-                    </button>
-                </div>
-
-                <div class="mt-8 pt-4 border-t border-panel-dark/50">
-                    <p class="text-xs font-mono text-terminal-green/70">أختر نوع الحدث ثم تنقل بين المقتراحات</p>
-                </div>
-            </aside>
-
-            <!-- Panel 2: Proposals Control (lg:col-span-3) -->
-            <!-- Enhanced with distinct orange warning theme for control panel -->
-            <aside class="lg:col-span-3 bg-panel-dark p-4 sm:p-6 rounded-2xl shadow-2xl border border-cmd-orange/40 h-auto">
-                <h2 class="text-xl font-black mb-4 text-cmd-orange border-b-2 border-cmd-orange/70 pb-2 font-sans">
-                    التحكم في المقترحات
+                <h2 class="text-2xl font-black text-cmd-blue border-b-2 border-cmd-blue/70 pb-3 font-sans">
+                    لوحة تحكم الحدث (اختر نوع العرض)
                 </h2>
 
-                <!-- Multi-Offer Proposals -->
-                <div x-show="activeMainTab === 'multi'" x-transition:enter.duration.500ms>
-                    <div class="space-y-4">
+                <!-- Main Event Type Tabs (P1) -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button 
+                        @click="activeMainTab = 'multi'; activeProposal = multiProposals[0].id"
+                        :class="{ 'bg-cmd-blue/70 text-neon-white shadow-cmd-blue': activeMainTab === 'multi', 'bg-panel-dark/50 text-slate-400 hover:bg-cmd-blue/20 hover:text-cmd-blue': activeMainTab !== 'multi' }"
+                        class="nav-btn flex-1 p-4 rounded-xl font-sans font-extrabold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-cmd-blue/70 text-xl"
+                    >
+                        حدث العروض المتعددة 💰
+                    </button>
+                    <button 
+                        @click="activeMainTab = 'single'; activeProposal = singleProposals[0].id"
+                        :class="{ 'bg-cmd-blue/70 text-neon-white shadow-cmd-blue': activeMainTab === 'single', 'bg-panel-dark/50 text-slate-400 hover:bg-cmd-blue/20 hover:text-cmd-blue': activeMainTab !== 'single' }"
+                        class="nav-btn flex-1 p-4 rounded-xl font-sans font-extrabold transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-cmd-blue/70 text-xl"
+                    >
+                        حدث العرض الواحد 🔥
+                    </button>
+                </div>
+                
+                <h3 class="text-xl font-black text-cmd-orange border-b border-cmd-orange/50 pb-2 font-sans pt-4">
+                    المقترحات المتاحة: 
+                    <span x-text="activeMainTab === 'multi' ? '(حدث العروض المتعددة)' : '(حدث العرض الواحد)'" class="text-sm font-mono text-terminal-green"></span>
+                </h3>
+
+                <!-- Proposal Buttons (P2) - Dynamically switchable list -->
+                <div class="space-y-4">
+                    <!-- Multi-Offer Proposals List -->
+                    <div x-show="activeMainTab === 'multi'" x-transition:enter.duration.400ms>
                         <template x-for="item in multiProposals" :key="item.id">
                             <button
-                                @click="activeProposal = item.id"
-                                :class="{ 'bg-cmd-blue/40 border-cmd-blue text-neon-white shadow-lg prop-btn active': activeProposal === item.id, 'border-cmd-blue/20 text-slate-300 hover:bg-cmd-blue/10': activeProposal !== item.id }"
-                                class="w-full text-right p-4 rounded-xl border-2 font-sans transition-all duration-200 text-lg font-bold focus:outline-none focus:ring-2 focus:ring-cmd-orange/70"
+                                @click="selectProposal(item.id)"
+                                :class="{ 'prop-btn active': activeProposal === item.id }"
+                                class="prop-btn w-full text-right my-2 p-4 rounded-xl font-sans text-lg font-bold text-neon-white focus:outline-none focus:ring-2 focus:ring-cmd-orange/70"
                             >
-                                <span x-text="item.title" class="font-bold"></span>
+                                <span x-text="item.title"></span>
                             </button>
                         </template>
                     </div>
-                </div>
 
-                <!-- Single-Offer Proposals -->
-                <div x-show="activeMainTab === 'single'" x-transition:enter.duration.500ms>
-                    <div class="space-y-4">
+                    <!-- Single-Offer Proposals List -->
+                    <div x-show="activeMainTab === 'single'" x-transition:enter.duration.400ms>
                         <template x-for="item in singleProposals" :key="item.id">
                             <button
-                                @click="activeProposal = item.id"
-                                :class="{ 'bg-cmd-blue/40 border-cmd-blue text-neon-white shadow-lg prop-btn active': activeProposal === item.id, 'border-cmd-blue/20 text-slate-300 hover:bg-cmd-blue/10': activeProposal !== item.id }"
-                                class="w-full text-right p-4 rounded-xl border-2 font-sans transition-all duration-200 text-lg font-bold focus:outline-none focus:ring-2 focus:ring-cmd-orange/70"
+                                @click="selectProposal(item.id)"
+                                :class="{ 'prop-btn active': activeProposal === item.id }"
+                                class="prop-btn w-full text-right my-2 p-4 rounded-xl font-sans text-lg font-bold text-neon-white focus:outline-none focus:ring-2 focus:ring-cmd-orange/70"
                             >
-                                <span x-text="item.title" class="font-bold"></span>
+                                <span x-text="item.title"></span>
                             </button>
                         </template>
                     </div>
                 </div>
-                <div class="mt-8 pt-4 border-t border-panel-dark/50">
-                    <p class="text-xs font-mono text-terminal-green/70">حدد المقترح للإطلاع</p>
-                </div>
-            
-            </aside>
 
-            <!-- Panel 3: Core Display (lg:col-span-6) -->
-            <main class="lg:col-span-6 cyber-panel p-6 sm:p-8 rounded-2xl relative overflow-hidden">
-                <div class="scan-overlay"></div>
+            </div>
+
+
+            <!-- ---------------------------------------------------- -->
+            <!-- VIEW 2: CONTENT DISPLAY SCREEN (Mobile Friendly P3) -->
+            <!-- ---------------------------------------------------- -->
+            <main x-show="currentView === 'content'" x-transition:enter.duration.500ms x-transition:leave.duration.300ms 
+                  class="modern-panel p-6 rounded-3xl relative overflow-hidden">
                 
-                <h2 class="text-2xl font-black mb-6 text-cmd-blue border-b-4 border-cmd-blue/70 pb-2 font-sans animate-glitch">
+                <!-- Back Button for Mobile UX -->
+                <button @click="goBack()" class="back-btn absolute top-5 left-5 p-2 px-4 rounded-full bg-cmd-blue/70 text-neon-white font-bold transition hover:bg-cmd-blue/90 text-sm">
+                    &lt; العودة للاختيار
+                </button>
+
+                <h2 class="text-2xl md:text-3xl font-black mb-6 text-cmd-blue border-b-4 border-cmd-blue/70 pb-2 font-sans pt-12 sm:pt-0 animate-glitch">
                     شاشة عرض العرض النشط
                 </h2>
 
                 <!-- Display area for currently active proposal content -->
-                <div id="core-display" class="relative z-10 p-2 sm:p-4 min-h-[400px] lg:min-h-[500px] overflow-y-auto">
+                <div id="core-display" class="relative z-10 p-2 sm:p-4 min-h-[400px] overflow-y-auto">
                     
                     <!-- Content for أولاً: حدث من عدة عروض - المقترح الأول: "التحكم صار بيدك" -->
                     <template x-if="activeProposal === 'idea1'">
                         <div x-transition:enter.duration.500ms class="font-sans space-y-6 text-neon-white/95">
-                            <h3 class="text-3xl font-extrabold text-cmd-orange animate-glitch">التحكم صار بيدك 🚀</h3>
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-cmd-orange animate-glitch">التحكم صار بيدك 🚀</h3>
                             <div class="text-base font-mono text-terminal-green border-b border-cmd-orange/50 pb-3">الحالة: حريه للعميل في الاختيار</div>
                             
                             <h4 class="text-xl font-bold text-cmd-blue pt-2">الشعار والبيانات:</h4>
@@ -284,7 +246,7 @@
                     <!-- Content for أولاً: حدث من عدة عروض - المقترح الثاني: "عروض الجمعة البيضاء" -->
                     <template x-if="activeProposal === 'idea2'">
                         <div x-transition:enter.duration.500ms class="font-sans space-y-6 text-neon-white/95">
-                            <h3 class="text-3xl font-extrabold text-cmd-orange animate-glitch">الباقات التفصيلية 📦</h3>
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-cmd-orange animate-glitch">الباقات التفصيلية 📦</h3>
                             <div class="text-base font-mono text-terminal-green border-b border-cmd-orange/50 pb-3">الحالة: باقات مفصلة لكل شريحة</div>
                             
                             <h4 class="text-xl font-bold text-cmd-blue pt-2">الشعار والباقات:</h4>
@@ -309,7 +271,7 @@
                     <!-- Content for ثانياً: حدث العرض الواحد - المقترح الأول: "أسبوع تكسير الأسعار" -->
                     <template x-if="activeProposal === 'idea3'">
                         <div x-transition:enter.duration.500ms class="font-sans space-y-6 text-neon-white/95">
-                            <h3 class="text-3xl font-extrabold text-cmd-orange animate-glitch">أسبوع تكسير الأسعار 🔨</h3>
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-cmd-orange animate-glitch">أسبوع تكسير الأسعار 🔨</h3>
                             <div class="text-base font-mono text-terminal-green border-b border-cmd-orange/50 pb-3">الحالة: استهداف اوسع</div>
                             
                             <h4 class="text-xl font-bold text-cmd-blue pt-2">الشعار والعرض:</h4>
@@ -331,7 +293,7 @@
                     <!-- Content for ثانياً: حدث العرض الواحد - المقترح الثاني: "صفقة العمر" -->
                     <template x-if="activeProposal === 'idea4'">
                         <div x-transition:enter.duration.500ms class="font-sans space-y-6 text-neon-white/95">
-                            <h3 class="text-3xl font-extrabold text-cmd-orange animate-glitch">صفقة العمر ✨</h3>
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-cmd-orange animate-glitch">صفقة العمر ✨</h3>
                             <div class="text-base font-mono text-terminal-green border-b border-cmd-orange/50 pb-3">الحالة: وقت محدود وحصري </div>
                             
                             <h4 class="text-xl font-bold text-cmd-blue pt-2">الشعار والعرض:</h4>
@@ -353,7 +315,7 @@
                     <!-- Content for ثانياً: حدث العرض الواحد - المقترح الثالث: "نصف التكلفة علينا" -->
                     <template x-if="activeProposal === 'idea5'">
                         <div x-transition:enter.duration.500ms class="font-sans space-y-6 text-neon-white/95">
-                            <h3 class="text-3xl font-extrabold text-cmd-orange animate-glitch">نصف التكلفة علينا 🤝 </h3>
+                            <h3 class="text-3xl md:text-4xl font-extrabold text-cmd-orange animate-glitch">نصف التكلفة علينا 🤝 </h3>
                             <div class="text-base font-mono text-terminal-green border-b border-cmd-orange/50 pb-3">الحالة: مشاركة التكلفة مع العملاء</div>
                             
                             <h4 class="text-xl font-bold text-cmd-blue pt-2">الشعار والعرض:</h4>
